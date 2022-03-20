@@ -3,6 +3,7 @@ package com.badibul.backend.controller;
 import com.badibul.backend.entity.User;
 import com.badibul.backend.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,5 +20,10 @@ public class UserController {
     @GetMapping
     public List<User> getAll(){
         return  userService.getAll();
+    }
+    @GetMapping("/{id}")
+    public User getOneUser(@PathVariable Long id){
+        //Custom Exception ekle
+        return userService.getOneUser(id);
     }
 }
