@@ -2,11 +2,10 @@ package com.badibul.backend.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.awt.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -19,4 +18,6 @@ public class Category {
     String name;
 
     String foto;
+    @ManyToMany(mappedBy = "categories",fetch = FetchType.LAZY)
+    Set<Events>events=new HashSet<>();
 }

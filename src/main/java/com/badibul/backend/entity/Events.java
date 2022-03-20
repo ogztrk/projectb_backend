@@ -6,13 +6,16 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "events")
 
-public class Events {
+public class Events implements Serializable {
 
     @Id
     Long id;
@@ -29,4 +32,15 @@ public class Events {
     LocalDateTime bitisTarihi;
 
     boolean isActive;
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @JoinTable(name = "event_categories",
+    joinColumns = {
+            @JoinColumn(name = "event_id",referencedColumnName = "id",
+            nullable = false,updatable = false)},
+               inverseJoinColumns = {
+
+
+            @JoinColumn(name = "category_id",referencedColumnName = "id",
+            nullable = false,updatable = false)})
+    Set<Category> categories= new HashSet<>();
 }
