@@ -2,10 +2,7 @@ package com.badibul.backend.controller;
 
 import com.badibul.backend.entity.User;
 import com.badibul.backend.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,9 +18,25 @@ public class UserController {
     public List<User> getAll(){
         return  userService.getAll();
     }
+
     @GetMapping("/{id}")
     public User getOneUser(@PathVariable Long id){
         //Custom Exception ekle
         return userService.getOneUser(id);
     }
+    @PostMapping
+    public User createNewUser(@RequestBody User NewUser){
+        return  userService.createNew(NewUser);
+    }
+
+    @PutMapping("/{id}")
+
+    public  User updateOneUser(@PathVariable Long id,@RequestBody User newUser) {
+        return  userService.updateUser(id, newUser);
+    }
+    @DeleteMapping("/{id}")
+    public  void deleteOneUser(@PathVariable Long id){
+        userService.deleteUser(id);
+    }
+
 }
