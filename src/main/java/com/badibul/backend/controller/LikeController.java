@@ -21,7 +21,7 @@ public class LikeController{
     @GetMapping
     public List<Like> getAllLikes(@RequestParam Optional<Long> userId, @RequestParam Optional <Long> eventId){
 
-        return  likeService.getLikeByUserOrPostId(userId,eventId);
+        return  likeService.getLikeByUserOrEventId(userId,eventId);
     }
 
     @GetMapping("/{likeId}")

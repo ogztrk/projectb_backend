@@ -22,7 +22,7 @@ public class LikeService {
     }
 
 
-    public List<Like> getLikeByUserOrPostId(Optional<Long> userId, Optional<Long> eventId) {
+    public List<Like> getLikeByUserOrEventId(Optional<Long> userId, Optional<Long> eventId) {
         if(userId.isPresent()&& eventId.isPresent()){
             return likeRepository.findByUserIdAndEventId(userId.get(),eventId.get());
         }
