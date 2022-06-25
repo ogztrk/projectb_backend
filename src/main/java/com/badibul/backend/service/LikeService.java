@@ -42,11 +42,10 @@ public class LikeService {
     public Like createOneLike(LikeCreateRequest likeCreateRequest) {
         if (userService.getOneUser(likeCreateRequest.getUserId())!=null&& eventService.GetOneEvent(likeCreateRequest.getEventId())!=null){
             Like newlike= new Like();
-            newlike.setId(likeCreateRequest.getId());
             newlike.setUser(userService.getOneUser(likeCreateRequest.getUserId()));
             newlike.setEvent(eventService.GetOneEvent(likeCreateRequest.getEventId()));
-            return likeRepository.save(newlike);
-
+            likeRepository.save(newlike);
+            return newlike;
         }
         return  null;
     }

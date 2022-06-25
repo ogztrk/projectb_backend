@@ -19,10 +19,10 @@ public class Events implements Serializable {
 
     @Id
     Long id;
-    @ManyToOne(fetch = FetchType.LAZY)  /* bu tabloyu çektiğimde ilgili user gelmesin diye*/
+    @ManyToOne(fetch = FetchType.EAGER)  /* bu tabloyu çektiğimde ilgili user gelmesin diye*/
     @JoinColumn(name = "user_id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    //@JsonIgnore
     User user;
     String title;
 
@@ -32,6 +32,7 @@ public class Events implements Serializable {
     LocalDateTime bitisTarihi;
 
     boolean isActive;
+
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
     @JoinTable(name = "event_categories",
     joinColumns = {
@@ -42,5 +43,6 @@ public class Events implements Serializable {
 
             @JoinColumn(name = "category_id",referencedColumnName = "id",
             nullable = false,updatable = false)})
+    @JsonIgnore
     Set<Category> categories= new HashSet<>();
 }

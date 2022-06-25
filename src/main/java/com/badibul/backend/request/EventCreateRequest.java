@@ -2,6 +2,7 @@ package com.badibul.backend.request;
 
 
 import com.badibul.backend.entity.Category;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ public class EventCreateRequest {
     LocalDateTime bitisTarihi;
 
     boolean isActive;
+    @JsonIgnore
     Set<Long> category_id= new HashSet<>();
 
 }

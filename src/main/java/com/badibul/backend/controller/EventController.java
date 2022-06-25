@@ -27,6 +27,7 @@ public class EventController {
         return  eventService.GetOneEvent(eventId);
     }
     //user idye göre eventleri alma fonksiyonu.
+    // http://localhost:8080/events?userId=1 seklinde test ett.
     @GetMapping
     public List<Events> getAllEvents(@RequestParam Optional<Long> userId){
 

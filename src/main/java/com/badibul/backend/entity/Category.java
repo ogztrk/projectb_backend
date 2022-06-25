@@ -1,5 +1,6 @@
 package com.badibul.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class Category {
     String name;
 
     String foto;
+    @JsonIgnore
     @ManyToMany(mappedBy = "categories",fetch = FetchType.LAZY)
     Set<Events>events=new HashSet<>();
 }

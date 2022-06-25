@@ -40,7 +40,6 @@ public class EventService {
     public Events createNew(EventCreateRequest eventCreateRequest) {
         if (userService.getOneUser(eventCreateRequest.getUserId())!=null){
             Events newEvent= new Events();
-            newEvent.setId(eventCreateRequest.getId());
             newEvent.setActive(true);
             newEvent.setUser(userService.getOneUser(eventCreateRequest.getUserId()));
             newEvent.setBitisTarihi(null);
