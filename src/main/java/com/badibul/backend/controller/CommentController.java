@@ -3,6 +3,7 @@ package com.badibul.backend.controller;
 import com.badibul.backend.entity.Comment;
 import com.badibul.backend.request.CommentCreateRequest;
 import com.badibul.backend.request.CommentUpdateRequest;
+import com.badibul.backend.response.CommentResponse;
 import com.badibul.backend.service.CommentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class CommentController {
         return commentService.getOneCommentById(commentId);
     }
     @GetMapping
-    public List<Comment> getAllComments(@RequestParam Optional<Long> userId, Optional<Long> eventId){
+    public List<CommentResponse> getAllComments(@RequestParam Optional<Long> userId, Optional<Long> eventId){
         return commentService.getCommentByUserIdOrEventId(userId,eventId);
 
     }

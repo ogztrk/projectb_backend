@@ -9,7 +9,4 @@ import java.util.Set;
 
 public interface CategoryRepository extends JpaRepository<Category,Long> {
 
-    Set<Category> findAllByIdIn(Set<Long> categoryId);
-
-    //List<Category> findByEvents_EventId(Long eventId);
 }

@@ -3,6 +3,7 @@ package com.badibul.backend.controller;
 import com.badibul.backend.entity.Basvuru;
 import com.badibul.backend.request.BasvuruCreateRequest;
 import com.badibul.backend.request.UpdateBasvuruRequest;
+import com.badibul.backend.response.BasvuruResponse;
 import com.badibul.backend.service.BasvuruService;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class BasvuruController {
         return  basvuruService.getOneBasvuru(basvuruId);
     }
     @GetMapping
-    public List<Basvuru> getAllBasvurular(@RequestParam Optional<Long> userId, @RequestParam Optional <Long> eventId){
+    public List<BasvuruResponse> getAllBasvurular(@RequestParam Optional<Long> userId, @RequestParam Optional <Long> eventId){
 
         return  basvuruService.getBasvuruByUserOrEventId(userId,eventId);
     }

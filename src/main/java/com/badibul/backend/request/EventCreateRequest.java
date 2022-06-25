@@ -19,7 +19,6 @@ public class EventCreateRequest {
     LocalDateTime bitisTarihi;
 
     boolean isActive;
-    @JsonIgnore
-    Set<Long> category_id= new HashSet<>();
+    Long categoryId;
 
 }

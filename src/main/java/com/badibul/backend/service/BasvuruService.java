@@ -4,10 +4,13 @@ import com.badibul.backend.entity.Basvuru;
 import com.badibul.backend.repository.BasvuruRepository;
 import com.badibul.backend.request.BasvuruCreateRequest;
 import com.badibul.backend.request.UpdateBasvuruRequest;
+import com.badibul.backend.response.BasvuruResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
 public class BasvuruService {
 
@@ -27,16 +30,19 @@ public class BasvuruService {
         return basvuruRepository.findById(basvuruId).orElseThrow(null);
     }
 
-    public List<Basvuru> getBasvuruByUserOrEventId(Optional<Long> userId, Optional<Long> eventId) {
-
+    public List<BasvuruResponse> getBasvuruByUserOrEventId(Optional<Long> userId, Optional<Long> eventId) {
+        List<Basvuru> list;
         if (userId.isPresent() && eventId.isPresent()) {
-            return basvuruRepository.findByUserIdAndEventId(userId.get(), eventId.get());
+            list= basvuruRepository.findByUserIdAndEventId(userId.get(), eventId.get());
         } else if (userId.isPresent()) {
-            return basvuruRepository.findByUserId(eventId.get());
+            list= basvuruRepository.findByUserId(eventId.get());
         } else if (eventId.isPresent()) {
-            return basvuruRepository.findByEventId(eventId.get());
+            list= basvuruRepository.findByEventId(eventId.get());
         }
-        return basvuruRepository.findAll();
+        else{
+           list= basvuruRepository.findAll();
+        }
+        return list.stream().map(p->new BasvuruResponse(p)).collect(Collectors.toList());
     }
 
     public Basvuru createOneBasvuru(BasvuruCreateRequest basvuruCreateRequest) {

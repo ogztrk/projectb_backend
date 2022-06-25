@@ -33,16 +33,22 @@ public class Events implements Serializable {
 
     boolean isActive;
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
-    @JoinTable(name = "event_categories",
-    joinColumns = {
-            @JoinColumn(name = "event_id",referencedColumnName = "id",
-            nullable = false,updatable = false)},
-               inverseJoinColumns = {
+//    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+//    @JoinTable(name = "event_categories",
+//    joinColumns = {
+//            @JoinColumn(name = "event_id",referencedColumnName = "id",
+//            nullable = false,updatable = false)},
+//               inverseJoinColumns = {
+//
+//
+//            @JoinColumn(name = "category_id",referencedColumnName = "id",
+//            nullable = false,updatable = false)})
+//    @JsonIgnore
+//    Set<Category> categories= new HashSet<>();
 
-
-            @JoinColumn(name = "category_id",referencedColumnName = "id",
-            nullable = false,updatable = false)})
-    @JsonIgnore
-    Set<Category> categories= new HashSet<>();
+    @ManyToOne(fetch = FetchType.EAGER)  /* bu tabloyu çektiğimde ilgili user gelmesin diye*/
+    @JoinColumn(name = "category_id",nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    //@JsonIgnore
+    Category category;
 }

@@ -19,7 +19,5 @@ public class Category {
     String name;
 
     String foto;
-    @JsonIgnore
-    @ManyToMany(mappedBy = "categories",fetch = FetchType.LAZY)
-    Set<Events>events=new HashSet<>();
+
 }

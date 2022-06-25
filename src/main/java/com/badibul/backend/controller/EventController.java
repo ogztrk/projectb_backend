@@ -5,6 +5,7 @@ import com.badibul.backend.entity.Events;
 
 import com.badibul.backend.request.EventCreateRequest;
 import com.badibul.backend.request.EventUpdateRequest;
+import com.badibul.backend.response.EventResponse;
 import com.badibul.backend.service.EventService;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +30,9 @@ public class EventController {
     //user idye göre eventleri alma fonksiyonu.
     // http://localhost:8080/events?userId=1 seklinde test ett.
     @GetMapping
-    public List<Events> getAllEvents(@RequestParam Optional<Long> userId){
+    public List<EventResponse> getAllEvents(@RequestParam Optional<Long> userId, @RequestParam Optional<Long> categoryId){
 
-        return  eventService.getEventsByUserId(userId);
+        return  eventService.getEventsByUserIdOrCategoryIdWithLikes(userId,categoryId);
     }
 
     @PostMapping

@@ -1,12 +1,14 @@
 package com.badibul.backend.controller;
 
 import com.badibul.backend.entity.Category;
+import com.badibul.backend.entity.Comment;
+import com.badibul.backend.request.CategoryCreateRequest;
+import com.badibul.backend.request.CategoryUpdateRequest;
+import com.badibul.backend.request.CommentCreateRequest;
 import com.badibul.backend.service.CategoryService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/categories")
@@ -18,15 +20,30 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-   /* @GetMapping
-    public Set<Category> getAllCategories(@RequestParam Set<Long> eventId){
+    @GetMapping
+    public List<Category> getAllCategories(){
 
-        return categoryService.getCategoryByEventId(eventId);
-    }*/
+        return categoryService.getAllCategories();
+    }
 
     @GetMapping("/{categoryId}")
     public Category getCategoryById(@PathVariable Long categoryId){
 
         return categoryService.getOneCategory(categoryId);
     }
+    @PostMapping
+    public Category createOneCategory(@RequestBody CategoryCreateRequest categoryCreateRequest){
+
+        return  categoryService.createOneCategory(categoryCreateRequest);
+    }
+    @PutMapping("/{categoryId}")
+    public Category updateOneCategory(@PathVariable Long categoryId,@RequestBody CategoryUpdateRequest categoryUpdateRequest){
+        return categoryService.updateOneCategory(categoryId,categoryUpdateRequest);
+    }
+    @DeleteMapping("/{categoryId}")
+    public void deleteOneCategory(@PathVariable Long categoryId){
+        categoryService.deleteOneCategory(categoryId);
+
+    }
+
 }

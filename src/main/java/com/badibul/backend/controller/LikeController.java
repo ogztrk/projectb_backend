@@ -3,6 +3,7 @@ package com.badibul.backend.controller;
 
 import com.badibul.backend.entity.Like;
 import com.badibul.backend.request.LikeCreateRequest;
+import com.badibul.backend.response.LikeResponse;
 import com.badibul.backend.service.LikeService;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class LikeController{
         this.likeService = likeService;
     }
     @GetMapping
-    public List<Like> getAllLikes(@RequestParam Optional<Long> userId, @RequestParam Optional <Long> eventId){
+    public List<LikeResponse> getAllLikes(@RequestParam Optional<Long> userId, @RequestParam Optional <Long> eventId){
 
         return  likeService.getLikeByUserOrEventId(userId,eventId);
     }

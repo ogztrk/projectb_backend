@@ -3,10 +3,12 @@ package com.badibul.backend.service;
 import com.badibul.backend.entity.Like;
 import com.badibul.backend.repository.LikeRepository;
 import com.badibul.backend.request.LikeCreateRequest;
+import com.badibul.backend.response.LikeResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class LikeService {
@@ -22,17 +24,21 @@ public class LikeService {
     }
 
 
-    public List<Like> getLikeByUserOrEventId(Optional<Long> userId, Optional<Long> eventId) {
+    public List<LikeResponse> getLikeByUserOrEventId(Optional<Long> userId, Optional<Long> eventId) {
+        List<Like> list;
         if(userId.isPresent()&& eventId.isPresent()){
-            return likeRepository.findByUserIdAndEventId(userId.get(),eventId.get());
+            list= likeRepository.findByUserIdAndEventId(userId.get(),eventId.get());
         }
         else if(userId.isPresent()){
-            return  likeRepository.findByUserId(eventId.get());
+            list=  likeRepository.findByUserId(eventId.get());
         }
         else if(eventId.isPresent()){
-            return  likeRepository.findByEventId(eventId.get());
+            list=  likeRepository.findByEventId(eventId.get());
         }
-        return  likeRepository.findAll();
+        else{
+            list=likeRepository.findAll();
+        }
+        return  list.stream().map(p-> new LikeResponse(p)).collect(Collectors.toList());
     }
 
     public Like getLikeById(Long likeId) {

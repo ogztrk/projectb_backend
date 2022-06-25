@@ -4,10 +4,13 @@ import com.badibul.backend.entity.Comment;
 import com.badibul.backend.repository.CommentRepository;
 import com.badibul.backend.request.CommentCreateRequest;
 import com.badibul.backend.request.CommentUpdateRequest;
+import com.badibul.backend.response.CommentResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
 public class CommentService {
 
@@ -26,15 +29,19 @@ public class CommentService {
         return commentRepository.findById(commentId).orElseThrow(null);
     }
 
-    public List<Comment> getCommentByUserIdOrEventId(Optional<Long> userId, Optional<Long> eventId) {
+    public List<CommentResponse> getCommentByUserIdOrEventId(Optional<Long> userId, Optional<Long> eventId) {
+        List<Comment>list;
         if (userId.isPresent() && eventId.isPresent()) {
-            return commentRepository.findByUserIdAndEventId(userId.get(), eventId.get());
+            list= commentRepository.findByUserIdAndEventId(userId.get(), eventId.get());
         } else if (userId.isPresent()) {
-            return commentRepository.findByUserId(userId.get());
+            list= commentRepository.findByUserId(userId.get());
         } else if (eventId.isPresent()) {
-            return commentRepository.findByEventId(eventId.get());
+            list= commentRepository.findByEventId(eventId.get());
         }
-        return commentRepository.findAll();
+        else{
+            list=commentRepository.findAll();
+        }
+        return list.stream().map(p->new CommentResponse(p)).collect(Collectors.toList());
     }
 
     public void deleteOneCommentById(Long commentId) {
