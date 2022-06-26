@@ -35,7 +35,7 @@ public class BasvuruService {
         if (userId.isPresent() && eventId.isPresent()) {
             list= basvuruRepository.findByUserIdAndEventId(userId.get(), eventId.get());
         } else if (userId.isPresent()) {
-            list= basvuruRepository.findByUserId(eventId.get());
+            list= basvuruRepository.findByUserId(userId.get());
         } else if (eventId.isPresent()) {
             list= basvuruRepository.findByEventId(eventId.get());
         }
