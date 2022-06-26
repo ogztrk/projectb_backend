@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 public class Events implements Serializable {
 
     @Id
+    @GeneratedValue
     Long id;
     @ManyToOne(fetch = FetchType.EAGER)  /* bu tabloyu çektiğimde ilgili user gelmesin diye*/
     @JoinColumn(name = "user_id",nullable = false)
