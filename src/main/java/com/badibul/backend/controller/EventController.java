@@ -23,9 +23,9 @@ public class EventController {
     }
 
     @GetMapping("/{eventId}")
-    public Events getEventById(@PathVariable Long eventId){
+    public EventResponse getEventById(@PathVariable Long eventId){
 
-        return  eventService.GetOneEvent(eventId);
+        return  eventService.getOneEventById(eventId);
     }
     //user idye göre eventleri alma fonksiyonu.
     // http://localhost:8080/events?userId=1 seklinde test ett.

@@ -55,11 +55,11 @@ public class EventService {
     };
 
 
-    /*public EventResponse getOneEventById(Long eventId) {
+    public EventResponse getOneEventById(Long eventId) {
         Events event = eventsRepository.findById(eventId).orElse(null);
         //List<LikeResponse> likes = likeService.getLikeByUserOrEventId(Optional.ofNullable(null), Optional.of(eventId));
         return new EventResponse(event);
-    }*/
+    }
 
     public Events createNew(EventCreateRequest eventCreateRequest) {
         if (userService.getOneUser(eventCreateRequest.getUserId())!=null){
