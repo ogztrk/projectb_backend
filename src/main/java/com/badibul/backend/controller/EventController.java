@@ -32,7 +32,7 @@ public class EventController {
     @GetMapping
     public List<EventResponse> getAllEvents(@RequestParam Optional<Long> userId, @RequestParam Optional<Long> categoryId){
 
-        return  eventService.getEventsByUserIdOrCategoryIdWithLikes(userId,categoryId);
+        return  eventService.getEventsByUserIdOrCategoryId(userId,categoryId);
     }
 
     @PostMapping

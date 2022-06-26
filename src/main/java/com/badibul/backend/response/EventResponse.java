@@ -18,10 +18,9 @@ public class EventResponse {
     String text;
     LocalDateTime baslangicTarihi;
     LocalDateTime bitisTarihi;
-    List<LikeResponse> eventLikes;
 
 
-    public EventResponse(Events entity,List<LikeResponse>likes){
+    public EventResponse(Events entity){
         this.id=entity.getId();
         this.userId=entity.getUser().getId();
         this.categoryId=entity.getCategory().getId();
@@ -31,7 +30,6 @@ public class EventResponse {
         this.text=entity.getText();
         this.baslangicTarihi=entity.getBaslangicTarihi();
         this.bitisTarihi=entity.getBitisTarihi();
-        this.eventLikes=likes;
     }
 
 }

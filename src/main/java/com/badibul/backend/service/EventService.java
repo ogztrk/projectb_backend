@@ -37,7 +37,7 @@ public class EventService {
     }
 
 
-    public List<EventResponse> getEventsByUserIdOrCategoryIdWithLikes(Optional<Long> userId, Optional<Long> categoryId) {
+    public List<EventResponse> getEventsByUserIdOrCategoryId(Optional<Long> userId, Optional<Long> categoryId) {
             List<Events> list;
         if (userId.isPresent() && categoryId.isPresent()) {
             list= eventsRepository.findByUserIdAndCategoryId(userId.get(), categoryId.get());}
@@ -50,19 +50,16 @@ public class EventService {
         else{
             list=eventsRepository.findAll();
         }
-        return  list.stream().map(p->{
-
-            List<LikeResponse> likes = likeService.getLikeByUserOrEventId(Optional.ofNullable(null), Optional.of(p.getId()));
-            return new EventResponse(p, likes);}).collect(Collectors.toList());
+        return  list.stream().map(p-> new EventResponse(p)).collect(Collectors.toList());
 
     };
 
 
-    public EventResponse getOnePostByIdWithLikes(Long eventId) {
+    /*public EventResponse getOneEventById(Long eventId) {
         Events event = eventsRepository.findById(eventId).orElse(null);
-        List<LikeResponse> likes = likeService.getLikeByUserOrEventId(Optional.ofNullable(null), Optional.of(eventId));
-        return new EventResponse(event, likes);
-    }
+        //List<LikeResponse> likes = likeService.getLikeByUserOrEventId(Optional.ofNullable(null), Optional.of(eventId));
+        return new EventResponse(event);
+    }*/
 
     public Events createNew(EventCreateRequest eventCreateRequest) {
         if (userService.getOneUser(eventCreateRequest.getUserId())!=null){
